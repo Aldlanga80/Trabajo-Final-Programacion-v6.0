@@ -1,6 +1,6 @@
 // EL ROUTER VALIDA METODOS Y RUTAS PROPIAS DE LA ENTIDAD
 
-// GET http://localhost:3000/product
+// GET http://localhost:5173/product
 
 import { Router } from "express"
 import ProductController from "../controllers/productController"

@@ -3,7 +3,7 @@ import Layout from "../components/Layout"
 import UpdateProduct from "../components/UpdateProduct"
 import { useAuth } from "../context/AuthContext"
 import { CATEGORIES } from "../constants/categories.js"
-import { ToastMessage } from "../components/ToastMessage.jsx"
+import { ToastMessage } from "../components/ToastMesagge.jsx"
 
 const Home = () => {
   const initialErrorState = {
