@@ -28,7 +28,7 @@ const AddProduct = () => {
     console.log(token)
 
     try {
-      const response = await fetch(`http://localhost:3000/products`, {
+      const response = await fetch(`https://api.render.com/deploy/srv-d4s1l2a4d50c73b6i98g?key=0AZrBEavSEA`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
