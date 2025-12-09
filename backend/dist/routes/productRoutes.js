@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// GET http://localhost:5173/product
+// GET http://localhost:3000/product
 const express_1 = require("express");
 const productController_1 = __importDefault(require("../controllers/productController"));
 const authMiddleware_1 = __importDefault(require("../middleware/authMiddleware"));
