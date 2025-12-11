@@ -10,8 +10,7 @@ const productController_1 = __importDefault(require("../controllers/productContr
 const authMiddleware_1 = __importDefault(require("../middleware/authMiddleware"));
 const uploadMiddleware_1 = __importDefault(require("../middleware/uploadMiddleware"));
 const productRouter = (0, express_1.Router)();
-// TODAS LAS PETICIONES QUE LLEGAN AL PRODUCTROUTER EMPIEZAN CON
-// POST http://localhost:3000/products/
+
 productRouter.get("/", productController_1.default.getAllProducts);
 productRouter.get("/:id", productController_1.default.getProduct);
 productRouter.post("/", authMiddleware_1.default, uploadMiddleware_1.default.single("image"), productController_1.default.addProduct);

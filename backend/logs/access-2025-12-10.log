@@ -1,2 +1,8 @@
 ::1 GET /products? 304 - - 184.207 ms
 ::1 GET /products? 304 - - 9.573 ms
+::1 GET /products? 304 - - 8.622 ms
+::1 GET /products? 304 - - 9.479 ms
+::1 GET /products? 304 - - 8.688 ms
+::1 GET /products? 304 - - 5.913 ms
+::1 GET /products? 200 399 - 184.044 ms
+::1 GET /products? 304 - - 247.228 ms

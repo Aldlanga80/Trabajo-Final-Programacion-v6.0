@@ -30,8 +30,7 @@ app.use((0, morgan_1.default)("dev"));
 app.get("/", (__, res) => {
     res.json({ status: true });
 });
-app.use("/auth", authRouter_1.default);
-// http://localhost:3000/products?
+app.use("/auth", authRouter_1.default)
 app.use("/products", productRoutes_1.default);
 // enviar correo electrónico
 app.post("/email/send", emailService_1.default);

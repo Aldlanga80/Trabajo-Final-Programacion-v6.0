@@ -1,0 +1,16 @@
+meta {
+  name: "Login"
+  type: "http"
+}
+
+request {
+  method: "POST"
+  url: "{{baseUrl}}/auth/login"
+  body {
+    type: "json"
+    content: {
+      "email": "aldo@example.com",
+      "password": "123456"
+    }
+  }
+}

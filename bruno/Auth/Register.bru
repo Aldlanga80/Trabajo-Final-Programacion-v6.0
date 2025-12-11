@@ -1,0 +1,17 @@
+meta {
+  name: "Register"
+  type: "http"
+}
+
+request {
+  method: "POST"
+  url: "{{baseUrl}}/auth/register"
+  body {
+    type: "json"
+    content: {
+      "name": "Aldo",
+      "email": "aldo@example.com",
+      "password": "123456"
+    }
+  }
+}

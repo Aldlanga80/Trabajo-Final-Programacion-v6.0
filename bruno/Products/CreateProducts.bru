@@ -1,0 +1,32 @@
+meta {
+  name: "CreateProduct"
+  type: "http"
+}
+
+request {
+  method: "POST"
+  url: "{{baseUrl}}/products"
+  headers {
+    Authorization: "Bearer {{token}}"
+  }
+  body {
+    type: "multipart-form"
+    fields {
+      name: "name"
+      value: "Producto ejemplo"
+    }
+    fields {
+      name: "price"
+      value: "1200"
+    }
+    fields {
+      name: "description"
+      value: "Descripción del producto"
+    }
+    files {
+      name: "image"
+      file: "./ejemplo.jpg"
+    }
+  }
+}
+

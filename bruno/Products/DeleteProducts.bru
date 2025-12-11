@@ -1,0 +1,12 @@
+meta {
+  name: "DeleteProduct"
+  type: "http"
+}
+
+request {
+  method: "DELETE"
+  url: "{{baseUrl}}/products/{{productId}}"
+  headers {
+    Authorization: "Bearer {{token}}"
+  }
+}
