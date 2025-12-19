@@ -1,0 +1,13 @@
+::1 GET / 200 15 - 19.270 ms
+::1 GET / 200 15 - 0.709 ms
+::1 GET /products? 200 399 - 451.062 ms
+::1 POST /auth/login 200 235 - 345.463 ms
+::1 GET /products? 304 - - 61.181 ms
+::1 PATCH /products/68e6e5011be8718c28a766d9 200 222 - 69.718 ms
+::1 GET /products? 304 - - 8.553 ms
+::1 GET /products? 304 - - 37.088 ms
+::1 GET /products? 304 - - 93.408 ms
+::1 GET /products? 304 - - 16.440 ms
+::1 POST /auth/register 201 159 - 356.015 ms
+::1 POST /auth/login 200 234 - 147.993 ms
+::1 GET /products? 304 - - 43.924 ms
