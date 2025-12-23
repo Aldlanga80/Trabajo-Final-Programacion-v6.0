@@ -25,7 +25,9 @@ declare global {
 const PORT = process.env.PORT || 3000;
 const app = express()
 
-app.use(cors())
+app.use(cors(
+  { origin: ["https://backend-final-93ds.onrender.com"] }
+))
 app.use(express.json())
 app.use(logger)
 
