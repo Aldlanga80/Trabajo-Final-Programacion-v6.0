@@ -7,6 +7,7 @@ import Login from "../pages/Login"
 import Register from "../pages/Register"
 import ProtectedRoute from "../components/ProtectedRoute"
 import Contact from "../pages/Contact"
+import ExternalData from "../components/ExternalData"
 
 const RouterApp = () => {
   return (
@@ -25,6 +26,8 @@ const RouterApp = () => {
         <Route path="/contacto" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Register />} />
+        <Route path="/external" element={<ExternalData />} />
+
       </Routes>
     </BrowserRouter>
   )
