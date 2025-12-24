@@ -1,14 +1,17 @@
-import { connect } from "mongoose"
+import { MongoClient } from "mongodb"
 
-const connectDB = async () => {
-  const URI_DB = process.env.URI_DB!
+const uri = process.env.MONGO_URI as string
+
+const client = new MongoClient(uri)
+
+export const connectDB = async () => {
   try {
-    await connect(URI_DB)
-    console.log("✅ Conectado a Mongo DB con éxito!")
-  } catch (e) {
-    console.log("❌ Error al conectarse a Mongo DB")
+    await client.connect()
+    console.log("✅ MongoDB conectado")
+  } catch (error) {
+    console.error("❌ Error MongoDB", error)
     process.exit(1)
   }
 }
 
-export default connectDB
+export const db = client.db()

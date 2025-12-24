@@ -1,7 +1,7 @@
 // LEVANTAR NUESTRO SERIVICIO Y CONFIGURACIONES GLOBALES
 import express, { Request, Response } from "express"
 import cors from "cors"
-import connectDB from "./config/mongodb"
+import { connectDB } from "./config/mongodb"
 import productRouter from "./routes/productRoutes"
 import authRouter from "./routes/authRouter"
 import morgan from "morgan"
@@ -58,7 +58,8 @@ app.use((__, res) => {
 })
 
 // servidor en escucha
-app.listen(PORT, () => {
-  console.log(`✅ Servidor en escucha en el puerto http://localhost:${PORT}`)
-  connectDB()
+
+connectDB()
+app.listen(process.env.PORT, () => {
+  console.log(`Servidor escuchando en ${process.env.PORT}`)
 })
