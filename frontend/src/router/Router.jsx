@@ -7,8 +7,7 @@ import Login from "../pages/Login"
 import Register from "../pages/Register"
 import ProtectedRoute from "../components/ProtectedRoute"
 import Contact from "../pages/Contact"
-import ExternalData from "../components/ExternalData"
-
+import ExternalData from "../pages/ExternalData"
 const RouterApp = () => {
   return (
     <BrowserRouter>
