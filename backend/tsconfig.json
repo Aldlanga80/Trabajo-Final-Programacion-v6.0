@@ -4,6 +4,10 @@
     "module": "commonjs", // Ideal para proyectos con Express
     "rootDir": "./src",
     "outDir": "./dist",
+    "types": [
+      "node",
+      "express"
+    ],
     "esModuleInterop": true, // Permite importar módulos CommonJS fácilmente
     "strict": true, // Activa las validaciones más importantes
     "noImplicitAny": true, // No permite variables sin tipo
