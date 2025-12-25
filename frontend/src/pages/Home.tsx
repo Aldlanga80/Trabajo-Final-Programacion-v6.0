@@ -28,11 +28,12 @@ const Home = () => {
             key={product._id}
             id={product._id}
             name={product.name}
-            description={product.description}
+            description={product.description || ""}
             price={product.price}
-            category={product.category}
+            category={product.category || "General"}
           />
         ))}
+
       </div>
     </div>
   );

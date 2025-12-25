@@ -17,19 +17,18 @@ const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
 const allowedOrigins = [
-  "https://trabajo-final-programacion-v6-0.onrender.com"
+  "https://frontend-tu-app.onrender.com",
+  "http://localhost:5173"
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("No permitido por CORS"));
-    }
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) callback(null, true);
+    else callback(new Error("No permitido por CORS"));
   },
   credentials: true
 }));
+
 
 app.use(express.json());
 app.use(morgan("dev"));
