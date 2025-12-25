@@ -6,6 +6,7 @@ import morgan from "morgan";
 import fs from "fs";
 import productRouter from "./routes/productRoutes";
 import authRouter from "./routes/authRouter";
+import userRouter from "./routes/userRoutes"
 
 dotenv.config();
 
@@ -51,7 +52,7 @@ app.use((req, res, next) => {
   }
 });
 
-
+app.use("/users", userRouter);
 app.use(express.json());
 app.use(morgan("dev"));
 
