@@ -2,7 +2,7 @@ import cors from "cors"
 import express from "express"
 import dotenv from "dotenv"
 import { connectDB } from "./config/mongodb"
-import router from "./routes/externalRoutes"
+import externalRouter from "./routes/externalRoutes"
 
 dotenv.config()
 
@@ -13,7 +13,7 @@ app.use(express.json())
 
 connectDB()
 
-app.use("/api", router)
+app.use("/api", externalRouter)
 
 const PORT = process.env.PORT || 4000
 app.listen(PORT, () => {

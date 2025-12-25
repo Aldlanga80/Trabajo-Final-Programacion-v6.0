@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { getExternal } from "../controllers/externalControllers";
 
-const router = Router();
+const externalRouter = Router();
 
-router.get("/external-data", getExternal);
+externalRouter.get("/external-data", getExternal);
 
-export default router;
+export default externalRouter;
