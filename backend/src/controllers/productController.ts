@@ -27,13 +27,12 @@ const ProductController = {
 
   getProducts: async (req: Request, res: Response) => {
     try {
-      const products = await Product.find();
+      const products = await Product.find(); // Trae todos los productos
       res.json({ data: products });
     } catch (err: any) {
       res.status(500).json({ error: "Error al traer los productos" });
     }
   },
-
   getProductById: async (req: Request<{ id: string }>, res: Response) => {
     try {
       const product = await Product.findById(req.params.id);
