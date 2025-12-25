@@ -33,7 +33,6 @@ const Home = () => {
             category={product.category || "General"}
           />
         ))}
-
       </div>
     </div>
   );
