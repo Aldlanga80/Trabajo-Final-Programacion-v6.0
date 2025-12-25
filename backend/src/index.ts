@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/tienda";
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173/" })); // Cambia al puerto de tu frontend
+app.use(cors({ origin: "http://localhost:5173" })); // Cambia al puerto de tu frontend
 app.use(express.json());
 
 // Rutas
