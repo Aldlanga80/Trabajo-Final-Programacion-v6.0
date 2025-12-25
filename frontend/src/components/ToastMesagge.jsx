@@ -1,9 +1,12 @@
-const ToastMessage = ({ msg, color }) => {
-  return (
-    <div className="toast" style={{ backgroundColor: color }}>
-      <p>{msg}</p>
-    </div>
-  )
-}
+// ToastMessage.jsx
+import React from "react";
 
-export { ToastMessage }
+const ToastMessage = ({ message }) => {
+  return (
+    <div className="toast">
+      {message}
+    </div>
+  );
+};
+
+export default ToastMessage;  // 🔹 Muy importante
