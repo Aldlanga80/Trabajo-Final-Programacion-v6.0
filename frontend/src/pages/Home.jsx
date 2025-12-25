@@ -14,6 +14,7 @@ const Home = () => {
       delete: null
     }
   }
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const [products, setProducts] = useState([])
   const [selectedProduct, setSelectedProduct] = useState(null)
@@ -29,30 +30,26 @@ const Home = () => {
   // { id: '6925fe9645e9b029b62ac797', iat: 1764101665, exp: 1764105265 }
   const { user, token } = useAuth()
 
+
   const fetchingProducts = async (query = "") => {
     setResponseServer(initialErrorState)
     try {
-      const API_URL = import.meta.env.VITE_API_URL;
-      const response = await fetch(`${API_URL}/products?${query}`, { method: "GET" });
-      const dataProducts = await response.json()
-      setProducts(dataProducts.data.reverse())
+      // Construir la URL correctamente
+      const url = query ? `${API_URL}/products?${query}` : `${API_URL}/products`;
+      const response = await fetch(url, { method: "GET" });
+      const dataProducts = await response.json();
+      setProducts(dataProducts.data ? dataProducts.data.reverse() : dataProducts.reverse());
       setResponseServer({
         success: true,
         notification: "Exito al cargar los productos",
-        error: {
-          ...responseServer.error,
-          fetch: true
-        }
-      })
+        error: { ...responseServer.error, fetch: true }
+      });
     } catch (e) {
       setResponseServer({
         success: false,
         notification: "Error al traer los datos",
-        error: {
-          ...responseServer.error,
-          fetch: false
-        }
-      })
+        error: { ...responseServer.error, fetch: false }
+      });
     }
   }
 
