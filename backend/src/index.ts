@@ -17,8 +17,7 @@ const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://tu-frontend.onrender.com"
+  "https://trabajo-final-programacion-v6-0.onrender.com"
 ];
 
 
