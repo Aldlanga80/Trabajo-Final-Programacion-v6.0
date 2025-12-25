@@ -32,9 +32,8 @@ const Home = () => {
   const fetchingProducts = async (query = "") => {
     setResponseServer(initialErrorState)
     try {
-      const response = await fetch(`http://localhost:4000/products?${query}`, {
-        method: "GET"
-      })
+      const API_URL = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${API_URL}/products?${query}`, { method: "GET" });
       const dataProducts = await response.json()
       setProducts(dataProducts.data.reverse())
       setResponseServer({
@@ -67,12 +66,13 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:4000/products/${idProduct}`, {
+      const response = await fetch(`${API_URL}/products/${idProduct}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`
         }
-      })
+      });
+
       const dataResponse = await response.json()
 
       if (dataResponse.error) {

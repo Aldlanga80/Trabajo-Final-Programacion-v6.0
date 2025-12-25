@@ -1,30 +1,27 @@
-import cors from "cors"
-import express from "express"
-import dotenv from "dotenv"
-import connectDB from "./config/mongodb"
-import productRouter from "./routes/productRoutes"
-import authRouter from "./routes/authRouter"
-import mongoose from "mongoose"
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import connectDB from "./config/mongodb";
+import productRouter from "./routes/productRoutes";
+import authRouter from "./routes/authRouter";
 
-dotenv.config()
+dotenv.config();
 
-const app = express()
-const PORT = process.env.PORT || 4000
+const app = express();
+const PORT = process.env.PORT || 4000;
 
-app.use(cors({ origin: "http://localhost:4000" }));
-app.use(express.json())
+// Middlewares
+app.use(cors({ origin: "*" })); // Ajusta tu origen si tienes frontend en otra URL
+app.use(express.json());
 
-connectDB()
+// Conectar a MongoDB
+connectDB();
 
-app.use("/auth", authRouter)
-app.use("/products", productRouter)
+// Rutas
+app.use("/auth", authRouter);
+app.use("/products", productRouter);
 
-
-mongoose.connect(process.env.MONGO_URI!)
-  .then(() => console.log("Conectado a MongoDB"))
-  .catch(err => console.error("Error DB:", err));
-
-
+// Inicio del servidor
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+  console.log(`Server running on port ${PORT}`);
+});
