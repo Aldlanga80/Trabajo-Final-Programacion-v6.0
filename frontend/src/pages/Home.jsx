@@ -3,7 +3,7 @@ import Layout from "../components/Layout"
 import UpdateProduct from "../components/UpdateProduct"
 import { useAuth } from "../context/AuthContext"
 import { CATEGORIES } from "../constants/categories.js"
-import { ToastMessage } from "../components/ToastMessage.jsx"
+import ToastMessagge from "../components/ToastMesagge.jsx"
 
 const Home = () => {
   const initialErrorState = {
@@ -32,7 +32,7 @@ const Home = () => {
   const fetchingProducts = async (query = "") => {
     setResponseServer(initialErrorState)
     try {
-      const response = await fetch(`http://localhost:3000/products?${query}`, {
+      const response = await fetch(`http://localhost:4000/products?${query}`, {
         method: "GET"
       })
       const dataProducts = await response.json()
@@ -67,7 +67,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/products/${idProduct}`, {
+      const response = await fetch(`http://localhost:4000/products/${idProduct}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`
