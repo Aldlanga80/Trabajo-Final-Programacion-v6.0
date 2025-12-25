@@ -11,9 +11,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017";
+const MONGO_URI = process.env.MONGO_URI!;
 
-// Crear carpeta uploads si no existe
 const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
@@ -41,10 +40,9 @@ app.use(morgan("dev"));
 app.use("/products", productRouter);
 app.use("/auth", authRouter);
 
-// Conectar a MongoDB
 mongoose.connect(MONGO_URI)
-  .then(() => console.log("Conectado a MongoDB"))
-  .catch(err => console.error("Error de conexión a MongoDB:", err));
+  .then(() => console.log("Conectado a MongoDB Atlas"))
+  .catch(err => console.error("Error de conexión a MongoDB Atlas:", err));
 
 // Servidor
 app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
