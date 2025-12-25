@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import User, { IUser } from "../model/UserModel";
+import User, { IUser } from "../model/UserModel"
 
 // Lista en memoria (temporal)
 let userList: IUser[] = [];
