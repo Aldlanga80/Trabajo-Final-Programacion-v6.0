@@ -16,11 +16,11 @@ const MONGO_URI = process.env.MONGO_URI!;
 const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
-// Middleware
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://trabajo-final-programacion-v6-0.onrender.com"
+  "https://tu-frontend.onrender.com"
 ];
+
 
 app.use(cors({
   origin: function (origin, callback) {
