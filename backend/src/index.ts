@@ -20,7 +20,6 @@ const allowedOrigins = [
   "https://trabajo-final-programacion-v6-0.onrender.com"
 ];
 
-
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {

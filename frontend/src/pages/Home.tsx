@@ -26,14 +26,13 @@ const Home = () => {
         {products.map((product) => (
           <ProductCard
             key={product._id}
-            id={product._id}       // ✅ mapear '_id' a 'id'
+            id={product._id}
             name={product.name}
             description={product.description}
             price={product.price}
             category={product.category}
           />
         ))}
-
       </div>
     </div>
   );
