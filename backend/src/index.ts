@@ -1,7 +1,7 @@
 import cors from "cors"
 import express from "express"
 import dotenv from "dotenv"
-import connectDB from "./config/mongodb"
+import { connectDB } from "./config/mongodb"
 import productRoutes from "./routes/productRoutes"
 
 dotenv.config()
