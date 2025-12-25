@@ -7,12 +7,12 @@ let userList: IUser[] = [];
 // Registrar usuario
 export const registerUser = async (req: Request, res: Response) => {
   try {
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
     const userExists = await User.findOne({ email });
     if (userExists) return res.status(400).json({ message: "Usuario ya existe" });
 
-    const newUser = new User({ name, email, password });
+    const newUser = new User({ email, password });
     await newUser.save();
 
     // Añadir a lista en memoria
