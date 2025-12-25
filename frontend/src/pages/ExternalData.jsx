@@ -4,9 +4,10 @@ const ExternalData = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch("https://tu-backend.onrender.com/api/external-data")
+    fetch("https://backend-final-siji.onrender.com/api/external-data")
       .then(res => res.json())
-      .then(data => setData(data));
+      .then(data => setData(data))
+      .catch(err => console.error(err));
   }, []);
 
   return (
