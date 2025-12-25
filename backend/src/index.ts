@@ -11,14 +11,29 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/tienda";
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017";
 
 // Crear carpeta uploads si no existe
 const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173" })); // Frontend Vite
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://trabajo-final-programacion-v6-0.onrender.com"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("No permitido por CORS"));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(morgan("dev"));
 
