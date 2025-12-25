@@ -5,6 +5,9 @@ import { useAuth } from "../context/AuthContext"
 import { CATEGORIES } from "../constants/categories.js"
 import { ToastMessage } from "../components/ToastMesagge.jsx"
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+
 const Home = () => {
   const initialErrorState = {
     success: null,
@@ -32,14 +35,14 @@ const Home = () => {
   const fetchingProducts = async (query = "") => {
     setResponseServer(initialErrorState)
     try {
-      const response = await fetch(`http://localhost:3000/products?${query}`, {
+      const response = await fetch(`${API_URL}/products?${query}`, {
         method: "GET"
       })
       const dataProducts = await response.json()
       setProducts(dataProducts.data.reverse())
       setResponseServer({
         success: true,
-        notification: "Exito al cargar los productos",
+        notification: "Éxito al cargar los productos",
         error: {
           ...responseServer.error,
           fetch: true
@@ -67,7 +70,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/products/${idProduct}`, {
+      const response = await fetch(`${API_URL}/products/${idProduct}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`
@@ -81,12 +84,13 @@ const Home = () => {
       }
 
       setProducts(products.filter((p) => p._id !== idProduct))
-
       alert(`${dataResponse.data.name} borrado con éxito.`)
+
     } catch (error) {
-      // setResponseServer({ ...error, delete: "Error al borrar el producto." })
+      console.error(error)
     }
   }
+
 
   const handleUpdateProduct = (p) => {
     setSelectedProduct(p)
@@ -194,7 +198,7 @@ const Home = () => {
 
       <section className="products-grid">
         {products.map((p, i) => (
-          <div key={i} className="product-card">
+          <div key={p._id} className="product-card">
             <h3>{p.name}</h3>
             <p>{p.description}</p>
             <p><strong>Precio:</strong> ${p.price}</p>
@@ -215,5 +219,8 @@ const Home = () => {
     </Layout>
   )
 }
+
+console.log("API_URL:", API_URL);
+
 
 export default Home
