@@ -24,9 +24,13 @@ const allowedOrigins = [
   "http://localhost:5173"
 ];
 
+// Middleware global para todas las rutas y todos los métodos
 app.use(cors({
   origin: function (origin, callback) {
-    // Si es preflight o no tiene origin, permitir
+    const allowedOrigins = [
+      "https://trabajo-final-programacion-v6-0.onrender.com",
+      "http://localhost:5173"
+    ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -38,8 +42,14 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-// Middleware para responder OPTIONS automáticamente
-app.options("*", cors());
+// Preflight para todas las rutas
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 
 
 app.use(express.json());
