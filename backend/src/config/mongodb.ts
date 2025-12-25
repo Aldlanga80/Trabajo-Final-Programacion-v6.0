@@ -1,12 +1,14 @@
 import mongoose from "mongoose";
 
-export const connectDB = async () => {
+const connectDB = async () => {
   try {
-    console.log("MONGO_URI:", process.env.MONGO_URI); // 👈 DEBUG
-    await mongoose.connect(process.env.MONGO_URI!);
-    console.log("Conectado a MongoDB Atlas");
-  } catch (error) {
-    console.error("Error DB:", error);
-    process.exit(1);
+    const uri = process.env.MONGO_URI;
+    if (!uri) throw new Error("MONGO_URI no está definido en .env");
+    await mongoose.connect(uri);
+    console.log("✅ Conectado a MongoDB");
+  } catch (err) {
+    console.error("❌ Error DB:", err);
   }
 };
+
+export default connectDB;

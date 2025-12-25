@@ -7,7 +7,6 @@ import Login from "../pages/Login"
 import Register from "../pages/Register"
 import ProtectedRoute from "../components/ProtectedRoute"
 import Contact from "../pages/Contact"
-import ExternalPage from "../pages/ExternalPage"
 const RouterApp = () => {
   return (
     <BrowserRouter>
@@ -25,8 +24,6 @@ const RouterApp = () => {
         <Route path="/contacto" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Register />} />
-        <Route path="/externos" element={<ExternalPage />} />
-
       </Routes>
     </BrowserRouter>
   )
