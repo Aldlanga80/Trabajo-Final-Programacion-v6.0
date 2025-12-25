@@ -1,15 +1,19 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = require("mongoose");
+exports.connectDB = void 0;
+const mongoose_1 = __importDefault(require("mongoose"));
 const connectDB = async () => {
-    const URI_DB = process.env.URI_DB;
     try {
-        await (0, mongoose_1.connect)(URI_DB);
-        console.log("✅ Conectado a Mongo DB con éxito!");
+        console.log("MONGO_URI:", process.env.MONGO_URI); // 👈 DEBUG
+        await mongoose_1.default.connect(process.env.MONGO_URI);
+        console.log("Conectado a MongoDB Atlas");
     }
-    catch (e) {
-        console.log("❌ Error al conectarse a Mongo DB");
+    catch (error) {
+        console.error("Error DB:", error);
         process.exit(1);
     }
 };
-exports.default = connectDB;
+exports.connectDB = connectDB;
