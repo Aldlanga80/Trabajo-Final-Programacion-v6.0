@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import Product, { IProduct } from "../model/ProductModel";
-import { createProductSchema, updatedProductSchema } from "../validators/productValidator";
 
 interface IProductBody {
   name: string;
@@ -8,17 +7,12 @@ interface IProductBody {
   price: number;
   stock?: number;
   category?: string;
-  image?: string;
 }
 
 const ProductController = {
   createProduct: async (req: Request<{}, {}, IProductBody>, res: Response) => {
     try {
-      const parseResult = createProductSchema.safeParse(req.body);
-      if (!parseResult.success) return res.status(400).json({ error: parseResult.error.issues });
-
-
-      const product = await Product.create(parseResult.data);
+      const product = await Product.create(req.body);
       res.status(201).json({ data: product });
     } catch (err: any) {
       res.status(500).json({ error: err.message || "Error al crear el producto" });
@@ -27,12 +21,13 @@ const ProductController = {
 
   getProducts: async (req: Request, res: Response) => {
     try {
-      const products = await Product.find(); // Trae todos los productos
+      const products = await Product.find();
       res.json({ data: products });
     } catch (err: any) {
       res.status(500).json({ error: "Error al traer los productos" });
     }
   },
+
   getProductById: async (req: Request<{ id: string }>, res: Response) => {
     try {
       const product = await Product.findById(req.params.id);
@@ -45,10 +40,7 @@ const ProductController = {
 
   updateProduct: async (req: Request<{ id: string }, {}, Partial<IProductBody>>, res: Response) => {
     try {
-      const parseResult = updatedProductSchema.safeParse(req.body);
-      if (!parseResult.success) return res.status(400).json({ error: parseResult.error.issues });
-
-      const product = await Product.findByIdAndUpdate(req.params.id, parseResult.data, { new: true });
+      const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
       if (!product) return res.status(404).json({ error: "Producto no encontrado" });
       res.json({ data: product });
     } catch (err: any) {
