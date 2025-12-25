@@ -1,8 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import productRouter from "./routes/productRoutes";
 import dotenv from "dotenv";
+import morgan from "morgan";
+import productRouter from "./routes/productRoutes";
+import authRouter from "./routes/authRouter";
 
 dotenv.config();
 
@@ -11,15 +13,18 @@ const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/tienda";
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173" })); // Cambia al puerto de tu frontend
+app.use(cors({ origin: "http://localhost:5173" })); // Frontend Vite
 app.use(express.json());
+app.use(morgan("dev"));
 
 // Rutas
 app.use("/products", productRouter);
+app.use("/auth", authRouter);
 
 // Conectar a MongoDB
 mongoose.connect(MONGO_URI)
   .then(() => console.log("Conectado a MongoDB"))
   .catch(err => console.error("Error de conexión a MongoDB:", err));
 
+// Servidor
 app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));

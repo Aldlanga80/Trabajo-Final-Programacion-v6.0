@@ -6,21 +6,23 @@ import { CATEGORIES } from "../constants/categories.js";
 import ToastMessage from "../components/ToastMesagge.jsx";
 
 const Home = () => {
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
   const { user, token } = useAuth();
 
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+
   const fetchingProducts = async () => {
     try {
-      const res = await fetch(`${API_URL}/products`);
-      const data = await res.json();
-      setProducts(data.data || []);
+      const response = await fetch(`${API_URL}/products`);
+      const data = await response.json();
+      setProducts(data.data); // Asegúrate que el backend devuelve { data: [...] }
     } catch (err) {
       console.error("Error al traer productos:", err);
     }
   };
+
 
   const deleteProduct = async (id) => {
     if (!confirm("Está seguro de borrar el producto?")) return;
