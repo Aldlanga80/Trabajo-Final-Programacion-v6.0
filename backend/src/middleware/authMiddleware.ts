@@ -1,26 +1,22 @@
-import { Request, Response, NextFunction } from "express"
-import { verify } from "jsonwebtoken"
-import IUserTokenPayload from "../interfaces/IUserTokenPayload"
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
 
-const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  const SECRET_KEY = process.env.JWT_SECRET!
-  const header = req.headers.authorization
-
-  if (!header) {
-    return res.status(401).json({ succes: false, error: "El token es requerido" })
-  }
-
-  const token = header.split(" ")[1]
-
-  try {
-    const payload = verify(token, SECRET_KEY);
-
-    req.user = payload as IUserTokenPayload
-    next()
-  } catch (e) {
-    const error = e as Error
-    res.status(401).json({ succes: false, error: error.message })
-  }
+export interface AuthRequest extends Request {
+  user?: { id: string; email?: string };
 }
 
-export default authMiddleware 
+const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) return res.status(401).json({ error: "No token provided" });
+
+  const token = authHeader.split(" ")[1];
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: string; email?: string };
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: "Token inválido" });
+  }
+};
+
+export default authMiddleware;

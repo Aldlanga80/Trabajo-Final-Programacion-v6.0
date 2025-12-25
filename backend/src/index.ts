@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import fs from "fs";
 import productRouter from "./routes/productRoutes";
 import authRouter from "./routes/authRouter";
 
@@ -11,6 +12,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/tienda";
+
+// Crear carpeta uploads si no existe
+const uploadDir = "uploads";
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
 // Middleware
 app.use(cors({ origin: "http://localhost:5173" })); // Frontend Vite
