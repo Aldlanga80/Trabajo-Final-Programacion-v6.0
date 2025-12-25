@@ -1,17 +1,18 @@
 import { Request, Response } from "express";
-import Product from "../model/ProductModel";
+import Product, { IProduct } from "../model/ProductModel";
 
-// Interfaz para tipar el body al crear un producto
 interface IProductBody {
   name: string;
+  description?: string;
   price: number;
+  stock?: number;
+  category?: string;
 }
 
 const ProductController = {
   createProduct: async (req: Request<{}, {}, IProductBody>, res: Response) => {
     try {
-      const { name, price } = req.body;
-      const product = await Product.create({ name, price });
+      const product = await Product.create(req.body);
       res.status(201).json({ data: product });
     } catch (err: any) {
       res.status(500).json({ error: err.message || "Error al crear el producto" });
@@ -34,6 +35,16 @@ const ProductController = {
       res.json({ data: product });
     } catch (err: any) {
       res.status(500).json({ error: "Error al traer el producto" });
+    }
+  },
+
+  updateProduct: async (req: Request<{ id: string }, {}, Partial<IProductBody>>, res: Response) => {
+    try {
+      const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      if (!product) return res.status(404).json({ error: "Producto no encontrado" });
+      res.json({ data: product });
+    } catch (err: any) {
+      res.status(500).json({ error: "Error al actualizar el producto" });
     }
   },
 

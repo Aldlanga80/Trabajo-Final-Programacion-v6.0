@@ -1,22 +1,19 @@
-// DEFINE EL ESQUEMA DE DATOS Y CREA EL MODELO
-// EL MODELO:
-// 1 - crea la colección en mongodb
-// 2 - habilita los métodos de manipulación de data
+import mongoose, { Document } from "mongoose";
 
-import { model, Model, Schema } from "mongoose"
-import IProduct from "../interfaces/IProduct"
+export interface IProduct extends Document {
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  category: string;
+}
 
-const productSchema = new Schema<IProduct>({
+const productSchema = new mongoose.Schema<IProduct>({
   name: { type: String, required: true },
-  description: { type: String, default: "No tiene descripción" },
-  stock: { type: Number, default: 0, min: 0 },
-  category: { type: String, default: "No tiene categoria" },
-  price: { type: Number, default: 0, min: 0 },
-  image: { type: String }
-}, {
-  versionKey: false
-})
+  description: { type: String, default: "" },
+  price: { type: Number, required: true },
+  stock: { type: Number, default: 0 },
+  category: { type: String, default: "General" }
+}, { timestamps: true });
 
-const Product: Model<IProduct> = model("Product", productSchema)
-
-export default Product
+export default mongoose.model<IProduct>("Product", productSchema);

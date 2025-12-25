@@ -1,27 +1,25 @@
 import express from "express";
-import dotenv from "dotenv";
+import mongoose from "mongoose";
 import cors from "cors";
-import connectDB from "./config/mongodb";
 import productRouter from "./routes/productRoutes";
-import authRouter from "./routes/authRouter";
+import dotenv from "dotenv";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/tienda";
 
-// Middlewares
-app.use(cors({ origin: "*" })); // Ajusta tu origen si tienes frontend en otra URL
+// Middleware
+app.use(cors({ origin: "http://localhost:5173/" })); // Cambia al puerto de tu frontend
 app.use(express.json());
 
-// Conectar a MongoDB
-connectDB();
-
 // Rutas
-app.use("/auth", authRouter);
 app.use("/products", productRouter);
 
-// Inicio del servidor
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Conectar a MongoDB
+mongoose.connect(MONGO_URI)
+  .then(() => console.log("Conectado a MongoDB"))
+  .catch(err => console.error("Error de conexión a MongoDB:", err));
+
+app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
